@@ -4,19 +4,27 @@ const ApiHelper = require('../utils/api.helper');
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.get("/all-variants", async(req, res) => {
     try {
-        const variant = await Variant.create(req.body);
-        return ApiHelper.generateApiResponse(res, req, 'Product Created Successfully', 201, variant);
+        const allProducts = await Variant.find();
+        return ApiHelper.generateApiResponse(res, req, "All products.", 200, allProducts);
     } catch (error) {
-        return ApiHelper.generateApiResponse(res, req, 'Something went wrong while creating a variant', 500);
+        return ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
     }
 })
 
-router.get("/all-variants", async(req, res) => {
+
+router.patch("/:id", async(req, res) => {
     try {
-        const allProducts = await Product.find();
-        return ApiHelper.generateApiResponse(res, req, "All products.", 200, allProducts);
+        console.log(req.body)
+        const updatedVariant = await Variant.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        return ApiHelper.generateApiResponse(
+            res,
+            req,
+            "Variant updated successfully",
+            200,
+            updatedVariant
+          );
     } catch (error) {
         return ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
     }
