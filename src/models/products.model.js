@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema({
     name: {type: String, required: true},
     description: {type: String, required: true},
     price: {type: Number, required: true},
-    variants: { type: mongoose.Schema.Types.ObjectId, ref: "variant" }
+    variantIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "variant" }]
 }, {
     versionKey: false,
     timestamps: true

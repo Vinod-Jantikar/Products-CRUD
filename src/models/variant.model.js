@@ -5,7 +5,6 @@ const variantSchema = new mongoose.Schema({
     SKU: { type: String, required: true, unique: true },
     additionalCost: { type: Number, required: true },
     stockCount: { type: Number, required: true },
-    productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" }
 }, {
     versionKey: false,
     timestamps: true

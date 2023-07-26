@@ -73,7 +73,7 @@ router.get("/all-products", async(req, res) => {
     }
 })
 
-router.get('/get', async(req, res) => {
+router.get('/search', async(req, res) => {
     try {
         const {search} = req.query;
 
